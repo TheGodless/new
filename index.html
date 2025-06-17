@@ -4,109 +4,256 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Prolog коли с различни правила и GIF</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Orbitron:wght@600&display=swap" rel="stylesheet" />
   <style>
+    /* Background gradient animation */
+    @keyframes bgPulse {
+      0%, 100% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    /* Neon flicker animation */
+    @keyframes neonFlicker {
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        text-shadow:
+          0 0 8px #00c6ff,
+          0 0 20px #00c6ff,
+          0 0 30px #00f0ff,
+          0 0 40px #00f0ff,
+          0 0 70px #00e0ff;
+        color: #00f0ff;
+      }
+      20%, 22%, 24%, 55% {
+        text-shadow: none;
+        color: #007b99;
+      }
+    }
+
+    /* Smooth fade for result */
+    .fade-in {
+      animation: fadeIn 0.8s ease forwards;
+      opacity: 0;
+    }
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Floating effect for GIF */
+    @keyframes floatUpDown {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+
+    /* General resets */
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #dceeff, #e6f7ff);
       margin: 0;
       padding: 0;
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      min-height: 100vh;
+      background: linear-gradient(270deg, #020024, #090979, #00d4ff);
+      background-size: 600% 600%;
+      animation: bgPulse 30s ease infinite;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #e0f7ff;
+      overflow-x: hidden;
     }
 
     .container {
-      background: #ffffff;
-      max-width: 750px;
-      margin: 40px auto;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      background: rgba(0, 30, 60, 0.85);
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 40px 50px;
+      border-radius: 20px;
+      box-shadow:
+        0 0 10px #00c6ff,
+        0 0 20px #00d4ff,
+        0 0 40px #00f0ff;
       text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      border: 2px solid #00c6ff;
+      backdrop-filter: saturate(180%) blur(20px);
     }
 
     .container:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+      transform: translateY(-6px) scale(1.02);
+      box-shadow:
+        0 0 30px #00f0ff,
+        0 0 60px #00e0ff,
+        0 0 90px #00d4ff;
+      border-color: #00f0ff;
     }
 
     h1 {
-      color: #005f99;
-      margin-bottom: 20px;
-      font-size: 28px;
-      letter-spacing: 0.5px;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 600;
+      font-size: 36px;
+      margin-bottom: 25px;
+      color: #00f0ff;
+      text-shadow:
+        0 0 10px #00d4ff,
+        0 0 20px #00c6ff,
+        0 0 30px #00e0ff;
+      animation: neonFlicker 3s infinite;
+      letter-spacing: 1.5px;
     }
 
     textarea {
       width: 95%;
-      max-width: 650px;
-      height: 140px;
+      max-width: 720px;
+      height: 160px;
       font-family: 'Fira Code', monospace;
-      font-size: 16px;
-      padding: 12px;
-      margin-top: 10px;
-      border: 2px solid #007acc;
-      border-radius: 12px;
-      background: #f4faff;
-      box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.05);
+      font-size: 18px;
+      padding: 15px 18px;
+      margin-top: 15px;
+      border: 2.5px solid #00c6ff;
+      border-radius: 15px;
+      background: rgba(0, 50, 80, 0.75);
+      color: #ccf9ff;
+      box-shadow:
+        inset 0 2px 8px rgba(0, 200, 255, 0.3);
       resize: vertical;
-      transition: border-color 0.3s ease;
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+      outline: none;
+      caret-color: #00f0ff;
     }
 
     textarea:focus {
-      border-color: #005f99;
-      outline: none;
+      border-color: #00f0ff;
+      box-shadow:
+        0 0 15px #00f0ff,
+        inset 0 0 15px #00f0ff;
+      background: rgba(0, 60, 100, 0.85);
+      color: #e0ffff;
     }
 
     button {
-      margin-top: 20px;
-      padding: 12px 30px;
-      font-size: 18px;
-      background-color: #007acc;
-      color: white;
+      margin-top: 30px;
+      padding: 16px 40px;
+      font-size: 20px;
+      font-weight: 600;
+      background: linear-gradient(90deg, #00d4ff, #0085cc);
       border: none;
-      border-radius: 10px;
+      border-radius: 14px;
       cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease;
+      color: #001f33;
+      box-shadow:
+        0 0 12px #00d4ff,
+        0 0 30px #0085cc;
+      transition: background 0.4s ease, transform 0.25s ease, box-shadow 0.4s ease;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-family: 'Orbitron', sans-serif;
     }
 
     button:hover {
-      background-color: #005f99;
-      transform: scale(1.05);
+      background: linear-gradient(90deg, #00f0ff, #00b0e8);
+      box-shadow:
+        0 0 25px #00f0ff,
+        0 0 50px #00b0e8;
+      transform: scale(1.12) rotate(-2deg);
+      color: #00334d;
+      text-shadow:
+        0 0 6px #00f0ff;
     }
 
     #result {
-      margin-top: 25px;
-      font-size: 18px;
-      font-weight: 500;
-      color: #004a99;
-      min-height: 40px;
+      margin-top: 35px;
+      font-size: 20px;
+      font-weight: 600;
+      color: #b3eaff;
+      min-height: 48px;
+      text-shadow: 0 0 10px #00baff;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+
+    #result.visible {
+      opacity: 1;
     }
 
     .animal-container {
-      margin-top: 30px;
-      min-height: 180px;
+      margin-top: 40px;
+      min-height: 200px;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #ecf7ff;
-      border-radius: 16px;
-      box-shadow: inset 0 0 10px rgba(0, 123, 204, 0.15);
-      padding: 20px;
+      background: rgba(0, 40, 70, 0.9);
+      border-radius: 18px;
+      box-shadow:
+        inset 0 0 20px #0099ff66,
+        0 0 30px #007acc99;
+      padding: 28px;
+      filter: drop-shadow(0 0 15px #00b0ff88);
+      transition: background 0.5s ease;
+      overflow: hidden;
+      position: relative;
     }
 
     .animal-gif {
-      max-width: 220px;
-      border-radius: 14px;
-      box-shadow: 0 8px 20px rgba(0, 95, 153, 0.3);
-      transition: transform 0.3s ease;
+      max-width: 240px;
+      border-radius: 18px;
+      box-shadow:
+        0 10px 25px rgba(0, 240, 255, 0.5),
+        0 0 40px #00f0ffcc;
+      animation: floatUpDown 6s ease-in-out infinite;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      cursor: pointer;
     }
 
     .animal-gif:hover {
-      transform: scale(1.05);
+      transform: scale(1.12) rotate(3deg);
+      box-shadow:
+        0 15px 40px #00f0ff,
+        0 0 60px #00e0ff;
+      filter: drop-shadow(0 0 25px #00dfff);
+      z-index: 10;
+    }
+
+    /* Scrollbar styling for textarea */
+    textarea::-webkit-scrollbar {
+      width: 10px;
+    }
+    textarea::-webkit-scrollbar-track {
+      background: rgba(0, 40, 70, 0.5);
+      border-radius: 15px;
+    }
+    textarea::-webkit-scrollbar-thumb {
+      background: #00b0ffaa;
+      border-radius: 15px;
+    }
+    textarea::-webkit-scrollbar-thumb:hover {
+      background: #00d4ffcc;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+      .container {
+        margin: 30px 20px;
+        padding: 30px 25px;
+      }
+      textarea {
+        height: 130px;
+        font-size: 16px;
+      }
+      button {
+        width: 100%;
+        padding: 14px 0;
+      }
+      .animal-gif {
+        max-width: 180px;
+      }
     }
   </style>
 </head>
@@ -114,7 +261,7 @@
   <div class="container">
     <h1>Prolog коли с различни правила и GIF</h1>
 
-    <textarea id="prolog-input">
+    <textarea id="prolog-input" spellcheck="false">
 % Примери на заявки:
 is_electric(X).
 is_suv(X).
@@ -147,31 +294,51 @@ is_sports_car(X).
     session.consult(knowledge);
 
     const animalAnimations = {
-      tesla_model_s: '<img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3gza3B2aTd1a3NoZnc1dnpseTFuM3Z4OTBzejRnNnVzZzhsY2J6ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT8qB4JQPUH7yFo1So/giphy.gif" class="animal-gif" alt="Лъв анимация" />',
-      ford_explorer: '<img src="https://tenor.com/view/explorer-police-gif-25561032" class="animal-gif" alt="Ford Explorer" />',
-      ferrari_f8: '<img src="https://giphy.com/gifs/ferrari-T6jHVpKPAhQsg" class="animal-gif" alt="Ferrari F8" />'
+      tesla_model_s: '<img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3gza3B2aTd1a3NoZnc1dnpseTFuM3Z4OTBzejRnNnVzZzhsY2J6ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT8qB4JQPUH7yFo1So/giphy.gif" class="animal-gif" alt="Tesla Model S" />',
+      ford_explorer: '<img src="https://media1.tenor.com/m/rp-p7-Pl2hAAAAAd/explorer-police.gif" class="animal-gif" alt="Ford Explorer" />',
+      ferrari_f8: '<img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGgwcjd1a2Fsd3UyZXl1Z2hqZzUzbzA4aDVqdnRteG8zM3cxcnZocSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/T6jHVpKPAhQsg/giphy.gif" class="animal-gif" alt="Ferrari F8" />'
     };
 
     function runProlog() {
-      const input = document.getElementById("prolog-input").value;
+      const input = document.getElementById("prolog-input").value.trim();
       const resultDiv = document.getElementById("result");
       const animDiv = document.getElementById("animal-animation");
 
-      resultDiv.innerHTML = "";
+      resultDiv.classList.remove('visible');
       animDiv.innerHTML = "";
+      resultDiv.innerHTML = "";
 
-      session.query(input);
+      try {
+        session.query(input);
+      } catch(e) {
+        resultDiv.innerHTML = `<p>Грешка в заявката: ${e.message}</p>`;
+        resultDiv.classList.add('visible');
+        return;
+      }
+
+      let answersExist = false;
       session.answers(answer => {
         if(answer === false) {
-          resultDiv.innerHTML += `<p>Няма повече резултати.</p>`;
+          if(!answersExist) {
+            resultDiv.innerHTML = "<p>Няма резултати за тази заявка.</p>";
+          }
+          resultDiv.classList.add('visible');
           return;
         }
+        answersExist = true;
+
         const str = pl.format_answer(answer);
         if (str === "false.") {
           resultDiv.innerHTML = "<p>Няма резултати за тази заявка.</p>";
+          resultDiv.classList.add('visible');
           return;
         }
-        resultDiv.innerHTML += `<p>${str}</p>`;
+        // Append new result with fade
+        const p = document.createElement('p');
+        p.innerHTML = str;
+        p.classList.add('fade-in');
+        resultDiv.appendChild(p);
+        resultDiv.classList.add('visible');
 
         const match = str.match(/X = (\w+)/);
         if (match) {
